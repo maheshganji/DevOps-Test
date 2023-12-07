@@ -261,8 +261,8 @@ jobs:
           with:
             appname: 'App-DevOps-Azure-POC'
             createprofile: false
-            filepath: 'target/app-devops-vul-integrations-900.0.0-SNAPSHOT-app.jar'
-            # filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
+            # filepath: 'target/app-devops-vul-integrations-900.0.0-SNAPSHOT-app.jar'
+            filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
             #version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
             vid: '${{ secrets.VERACODE_API_ID }}'
             vkey: '${{ secrets.VERACODE_API_KEY }}'
