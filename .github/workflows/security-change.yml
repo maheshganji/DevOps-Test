@@ -176,8 +176,7 @@ jobs:
                   context-github: ${{ toJSON(github) }}
                   # List of Artifacts to be registered
                   artifacts: '[
-                      {
-                          "name": "app-devops.jar",
+                      {    "name": "app-devops.jar",
                           "version": "1.${{ github.run_number }}",
                           "semanticVersion": "1.${{ github.run_number }}.0",
                           "repositoryName": "${{ github.repository }}"
@@ -278,7 +277,7 @@ jobs:
             tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
             context-github: ${{ toJSON(github) }}
             job-name: 'Veracode Static Analysis'
-            security-result-attributes: '{ "scanner": "Veracode", "applicationName": "App-DevOps-Azure-POC", "securityToolId": "a670e317c383e110f920550f0501310b" }'
+            security-result-attributes: '{ "scanner": "Veracode", "applicationName": "App-DevOps-Azure-POC", "securityToolId": "1db0945c87cb7d10e4220f2d0ebb35b6" }'
             
         - name: ServiceNow DevOps Change Automation
         # You may pin to the exact commit or the version.
