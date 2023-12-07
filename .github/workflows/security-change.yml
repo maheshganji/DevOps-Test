@@ -237,37 +237,37 @@ jobs:
                   # Display Name of Job
                   job-name: 'Integration Tests'
 
-    # This workflow contains a job to build and submit pipeline scan, you will need to customize the build process accordingly and make sure the artifact you build is used as the file input to the pipeline scan file parameter
-    scan:
-      name: Veracode Static Analysis
-      needs: integrationTest
-      # The type of runner that the job will run on
-      permissions:
-        contents: read # for actions/checkout to fetch code
-        security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-        actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
-      runs-on: ubuntu-latest
-      steps:
-        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it and copies all sources into ZIP file for submitting for analysis. Replace this section with your applications build steps
-        - uses: actions/checkout@v3
-          with:
-            repository: ''
+    # # This workflow contains a job to build and submit pipeline scan, you will need to customize the build process accordingly and make sure the artifact you build is used as the file input to the pipeline scan file parameter
+    # scan:
+    #   name: Veracode Static Analysis
+    #   needs: integrationTest
+    #   # The type of runner that the job will run on
+    #   permissions:
+    #     contents: read # for actions/checkout to fetch code
+    #     security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+    #     actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+    #   runs-on: ubuntu-latest
+    #   steps:
+    #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it and copies all sources into ZIP file for submitting for analysis. Replace this section with your applications build steps
+    #     - uses: actions/checkout@v3
+    #       with:
+    #         repository: ''
 
-        - name: Build with Maven
-          run: mvn -B package --file pom.xml
+    #     - name: Build with Maven
+    #       run: mvn -B package --file pom.xml
 
-        - name: Veracode Upload And Scan
-          uses: veracode/veracode-uploadandscan-action@0.2.6
-          with:
-            appname: 'App-DevOps-Azure-POC'
-            createprofile: false
-            # filepath: 'target/app-devops-vul-integrations-900.0.0-SNAPSHOT-app.jar'
-            filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
-            #version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
-            vid: '${{ secrets.VERACODE_API_ID }}'
-            vkey: '${{ secrets.VERACODE_API_KEY }}'
-            #deleteincompletescan: 1
-            scantimeout: 20
+    #     - name: Veracode Upload And Scan
+    #       uses: veracode/veracode-uploadandscan-action@0.2.6
+    #       with:
+    #         appname: 'App-DevOps-Azure-POC'
+    #         createprofile: false
+    #         # filepath: 'target/app-devops-vul-integrations-900.0.0-SNAPSHOT-app.jar'
+    #         filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
+    #         #version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+    #         vid: '${{ secrets.VERACODE_API_ID }}'
+    #         vkey: '${{ secrets.VERACODE_API_KEY }}'
+    #         #deleteincompletescan: 1
+    #         scantimeout: 20
 
         - name: ServiceNow DevOps Security Results
           uses: maheshganji/custom-action-get@sonar
